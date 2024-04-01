@@ -5,6 +5,8 @@ from typing import Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """calculate start and end index for pagination purposes
+    """
     assert type(page) is int
     assert page > 0
     start_index = (page - 1) * page_size
