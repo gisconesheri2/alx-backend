@@ -6,7 +6,7 @@ from base_caching import BaseCaching
 from collections import OrderedDict
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """ a dict based cache system without
     a limit of 4 items with a LIFO mechanism
     """
@@ -30,10 +30,10 @@ class LRUCache(BaseCaching):
                 self.use_order[key] = 0
             else:
                 # get the last item in the Ordered Dict input order
-                least_use = list(self.use_order.items())[0]
-                del self.cache_data[least_use[0]]
-                del self.use_order[least_use[0]]
-                print("DISCARD: {}".format(least_use[0]))
+                most_use = list(self.use_order.items())[-2]
+                del self.cache_data[most_use[0]]
+                del self.use_order[most_use[0]]
+                print("DISCARD: {}".format(most_use[0]))
                 self.cache_data[key] = item
 
     def get(self, key):
