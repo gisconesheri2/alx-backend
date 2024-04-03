@@ -62,7 +62,7 @@ class Server:
         else:
             res['prev_page'] = page - 1
 
-        if page > pages_num:
+        if page >= pages_num:
             res['next_page'] = None
         else:
             res['next_page'] = page + 1
