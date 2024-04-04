@@ -34,7 +34,8 @@ class LFUCache(BaseCaching):
             else:
                 # get the least frequently used item in an Ordered Dict
                 # sort the dict by values and get the first tuple
-                least_use = sorted(list(self.use_order.items())[0:4],
+                print(self.use_order)
+                least_use = sorted(list(self.use_order.items())[0:BaseCaching.MAX_ITEMS],
                                    key=lambda x: x[1])[0]
                 del self.cache_data[least_use[0]]
                 del self.use_order[least_use[0]]
