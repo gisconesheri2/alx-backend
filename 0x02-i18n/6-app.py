@@ -11,6 +11,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 class Config():
     """
     Configuration for some flask variables
@@ -19,35 +20,29 @@ class Config():
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
-def get_locale():
-    """Get locale from request headers"""
-    lc = request.args.get('locale', None)
-    lng = app.config['LANGUAGES']
-
-    if lc is None and lc not in lng:
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
-    return lc
 
 app = Flask(__name__)
-babel = Babel(app, locale_selector=get_locale)
+babel = Babel(app)
 app.config.from_object(Config())
 
 
+@babel.localeselector
 def get_locale():
     """Get locale from request headers"""
 
     lc = request.args.get('locale', None)
     lng = app.config['LANGUAGES']
-    if lc in lng:
+    if lc and lc in lng:
         return lc
-    
+
     if 'user' in g:
         if g.user is not None:
             lc = g.user['locale']
             return lc
-        
+
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-    
+
+
 def get_user():
     """mock a user login"""
     user_login = request.args.get('login_as', None)
@@ -58,18 +53,18 @@ def get_user():
         return user
     return None
 
+
 @app.before_request
 def load_user():
     if 'user' not in g:
         g.user = get_user()
-    print(g.user)
     return g.user
 
 
 @app.route('/')
 def home():
     """Home route"""
-    return render_template('5-index.html')
+    return render_template('6-index.html')
 
 
 if __name__ == '__main__':
