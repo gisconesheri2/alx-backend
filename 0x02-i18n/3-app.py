@@ -2,7 +2,7 @@
 """Define locale selector for babel"""
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 
 
 class Config():
@@ -28,4 +28,8 @@ def get_locale():
 @app.route('/')
 def home():
     """Home route"""
-    return render_template('2-index.html')
+    return render_template('3-index.html')
+
+
+if __name__ == '__main__':
+    app.run()
