@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+start up a babel instance
+"""
 from flask import Flask, render_template
 from flask_babel import Babel
 

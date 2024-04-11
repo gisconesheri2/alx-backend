@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+A simple flask app with a single route
+"""
 from flask import Flask, render_template, request
 
 app = Flask(__name__)

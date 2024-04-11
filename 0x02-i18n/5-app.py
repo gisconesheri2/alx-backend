@@ -49,7 +49,7 @@ def get_user():
 
 
 @app.before_request
-def load_user():
+def before_request():
     if 'user' not in g:
         g.user = get_user()
     return g.user
